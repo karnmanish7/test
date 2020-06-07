@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 using TaskRobo.Models;
 
 namespace TaskRobo.Repository
@@ -15,25 +16,25 @@ namespace TaskRobo.Repository
         // This method should be used to delete category details from database based upon category id
         public int DeleteCategory(int categoryId)
         {
-            
+            return 0;
         }
 
         // This method should be used to get all categories from database based upon user's email
         public IReadOnlyList<Category> GetAllCategories(string email)
         {
-            
+            return null;
         }
 
         // This method should be used to get category details based upon category id
         public Category GetCategoryById(int categoryId)
         {
-            
+            return null;
         }
 
         // This method should be used to save category details into database
         public int SaveCategory(Category category)
         {
-            
+            return 0;
         }
     }
 }
