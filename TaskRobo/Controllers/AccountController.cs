@@ -15,6 +15,11 @@ namespace TaskRobo.Controllers
             _context = context;
             _useRrepository = useRrepository;
         }
+
+        public AccountController()
+        {
+
+        }
         // Register action method should return view
         [HttpGet]
         public ActionResult Register()
@@ -42,6 +47,7 @@ namespace TaskRobo.Controllers
 
         }
 
+        [HttpGet]
         // Login action method should return view to login
         public ActionResult Login(string returnUrl)
         {
