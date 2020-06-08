@@ -9,7 +9,8 @@ namespace TaskRobo.Models
     // RememberMe - bool, should be displayed as "Remember Me?" on the view
     public class LoginViewModel
     {
-        
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 
     // Create RegisterViewModel and add required properties with appropriate validations
