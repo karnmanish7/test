@@ -11,7 +11,7 @@ namespace TaskRobo.Controllers
     public class TasksController : Controller
     {
         private readonly ITaskRepository _repository;
-        string email = "m.karn@gmail.com";
+        
 
         /*
 * Implement the below mentioned methods as per mentioned requiremetns.
@@ -57,9 +57,10 @@ namespace TaskRobo.Controllers
         // GET: AllTasks
         public ActionResult Index()
         {
+            var currentUserName = User.Identity.Name;
             try
             {
-                var getAllTasks = _repository.GetAllTasks(email);
+                var getAllTasks = _repository.GetAllTasks(currentUserName);
                 return View(getAllTasks);
             }
             catch (Exception)

@@ -39,9 +39,10 @@ namespace TaskRobo.Repository
         // This method should be used to get all task details from database based upon user's email
         public IReadOnlyList<UserTask> GetAllTasks(string email)
         {
+            var result = context.AppUsers.FirstOrDefault(x => x.Email == email);
             if (context != null)
             {
-                var getAllTasks = context.UserTasks.ToList();
+                var getAllTasks = context.UserTasks.Where(x => x.UserID == result.UserID).ToList();
 
                 return getAllTasks;
             }
