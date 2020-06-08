@@ -51,6 +51,7 @@ namespace TaskRobo.Controllers
         // Login action method should return view to login
         public ActionResult Login(string returnUrl)
         {
+           
             return View();
         }
 

@@ -29,20 +29,20 @@ namespace TaskRobo.Controllers
         // Delete action method should handle post request and delete category from database based upon category id and redirect to index
 
         string email = "m.karn@gmail.com";
-        public CategoriesController(ICategoryRepository repository)
-        {
-            _repository = repository;
-        }
+        //public CategoriesController(ICategoryRepository repository)
+        //{
+        //    _repository = repository;
+        //}
         public CategoriesController()
         {
-
+            _repository = new CategoryRepository();
         }
         // GET: AllCategories
         public ActionResult Index()
         {
             try
             {
-                var getAllCategories =  _repository.GetAllCategories(email);
+                var getAllCategories =  _repository.GetAllCategories("m.karn@gmail.com");
                 if (getAllCategories.Count == 0)
                 {
                     return HttpNotFound();
