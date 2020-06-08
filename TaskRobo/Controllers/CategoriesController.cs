@@ -127,7 +127,7 @@ namespace TaskRobo.Controllers
                 {
                     return HttpNotFound();
                 }
-                return View();
+                return View(result);
             }
             catch (Exception)
             {
