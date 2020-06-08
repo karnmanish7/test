@@ -31,6 +31,7 @@ namespace TaskRobo.DependencyResolution {
 					scan.With(new ControllerConvention());
                 });
             For<IUserRepository>().Use<UserRepository>();
+            For<ITaskRepository>().Use<TaskRepository>();
         }
 
         #endregion

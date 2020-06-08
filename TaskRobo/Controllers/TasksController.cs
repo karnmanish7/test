@@ -45,10 +45,7 @@ namespace TaskRobo.Controllers
         // DeleteConfirmed action method should handle post request. Action name should be given as Delete using attribute.
         // This method should delete task details from database based upon logged in user and id then return to index
 
-        public TasksController()
-        {
-            _repository = new TaskRepository();
-        }
+        
         public TasksController(ITaskRepository repository)
         {
             _repository = repository;
