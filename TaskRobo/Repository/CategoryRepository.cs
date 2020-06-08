@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using TaskRobo.Models;
 
@@ -66,12 +67,12 @@ namespace TaskRobo.Repository
         }
 
         // This method should be used to save category details into database
-        public int SaveCategory(Category category)
+        public async Task<int> SaveCategory(Category category)
         {
             if (context != null)
             {
                 context.Categories.Add(category);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
                 return category.CategoryID;
             }
             return 0;

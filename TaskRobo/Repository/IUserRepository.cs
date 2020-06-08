@@ -6,5 +6,7 @@ namespace TaskRobo.Repository
     {
         int CreateUser(AppUser user);
         bool IsAuthenticated(AppUser user);
+
+        string GetUserIdByEmail(string Email);
     }
 }
