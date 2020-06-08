@@ -10,6 +10,7 @@ namespace TaskRobo.Controllers
     public class CategoriesController : Controller
     {
         private readonly ICategoryRepository _repository;
+        private readonly IUserRepository _userRepository;
 
         /*
 * Implement the below mentioned methods as per mentioned requiremetns.
@@ -28,10 +29,11 @@ namespace TaskRobo.Controllers
 
         // Delete action method should handle post request and delete category from database based upon category id and redirect to index
 
-             
-        public CategoriesController(ICategoryRepository repository)
+
+        public CategoriesController(ICategoryRepository repository, IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
         }
         //public CategoriesController()
         //{
@@ -86,23 +88,22 @@ namespace TaskRobo.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         //[Route("SaveCategory")]
-        public ActionResult SaveCategory( Category category)
+        public ActionResult Create( Category category)
         {
+
+            var currentUserName = User.Identity.Name;
+            string UserId = this._userRepository.GetUserIdByEmail(currentUserName);
+            category.UserID = UserId;
             if (ModelState.IsValid)
             {
                 try
                 {
                     var postId = _repository.SaveCategory(category);
-                    if (postId > 0)
-                    {
-                        return View(postId);
-                    }
-                    else
-                    {
-                        return HttpNotFound();
-                    }
+                    return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
@@ -110,7 +111,7 @@ namespace TaskRobo.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
             }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            return View(category);
         }
         [HttpDelete]
         //[Route("DeleteCategory/{id}")]

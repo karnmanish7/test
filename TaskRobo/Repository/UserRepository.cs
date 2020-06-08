@@ -26,5 +26,10 @@ namespace TaskRobo.Repository
         {
             return context.AppUsers.Where(c => c.Email == user.Email && c.Password == user.Password).Count() == 1;
         }
+
+        public string GetUserIdByEmail(string Email)
+        {
+            return context.AppUsers.Where(c => c.Email == Email).Select(c => c.UserID).FirstOrDefault();
+        }
     }
 }

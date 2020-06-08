@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TaskRobo.Models;
 
 namespace TaskRobo.Repository
@@ -7,7 +8,7 @@ namespace TaskRobo.Repository
     {
         int DeleteCategory(int? categoryId);
         IReadOnlyList<Category> GetAllCategories(string email);
-        int SaveCategory(Category category);
+        Task<int> SaveCategory(Category category);
         Category GetCategoryById(int? categoryId);
     }
 }
