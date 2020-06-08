@@ -40,9 +40,12 @@ namespace TaskRobo.Repository
         // This method should be used to get all categories from database based upon user's email
         public IReadOnlyList<Category> GetAllCategories(string email)
         {
+            var result = context.AppUsers.FirstOrDefault(x=>x.Email==email);
+         
             if (context != null)
             {
-                var getAllCategories = context.Categories.ToList();
+                //var getAllCategories = context.Categories.ToList();
+                var getAllCategories = context.Categories.Where(x => x.UserID == result.UserID).ToList();
 
                 return getAllCategories;
             }
