@@ -7,6 +7,7 @@ using TaskRobo.Repository;
 
 namespace TaskRobo.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
         private readonly ITaskRepository _repository;

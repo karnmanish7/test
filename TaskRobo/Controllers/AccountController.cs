@@ -52,8 +52,8 @@ namespace TaskRobo.Controllers
         [HttpGet]
         // Login action method should return view to login
         public ActionResult Login(string returnUrl)
-        {
-            
+        {  
+
             return View();
         }
 
@@ -66,11 +66,19 @@ namespace TaskRobo.Controllers
             AppUser appUser = new AppUser();
             appUser.Email = model.Email;
             appUser.Password = model.Password;
+
             if (ModelState.IsValid)
             {
-                _useRrepository.IsAuthenticated(appUser);
-                return RedirectToAction("Index", "Tasks");
+                bool IsValidUser = _useRrepository.IsAuthenticated(appUser);
+
+                if (IsValidUser)
+                {
+                    FormsAuthentication.SetAuthCookie(appUser.Email, false);
+                    return RedirectToAction("Index", "Tasks");
+                }
             }
+            ModelState.AddModelError("", "invalid Username or Password");
+           
             return View(model);
         }
 
@@ -78,7 +86,8 @@ namespace TaskRobo.Controllers
         
         public ActionResult LogOff()
         {
-            return View();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
         }
 
     }
