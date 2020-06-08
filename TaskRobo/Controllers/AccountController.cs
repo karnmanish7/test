@@ -7,12 +7,12 @@ namespace TaskRobo.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly TaskDbContext _context;
+        //private readonly TaskDbContext _context;
         private readonly IUserRepository _useRrepository;
 
         public AccountController(IUserRepository useRrepository)
         {
-            _context = new TaskDbContext();
+            //_context = new TaskDbContext();
             _useRrepository = useRrepository;
         }
 
