@@ -4,7 +4,13 @@
 }
 
 <h2>Tasks</h2>
+<p>
+    
 
+    @Html.ActionLink("Create Task", "Create", "Tasks", routeValues: null, htmlAttributes: new { id = "createTaskLink" })
+
+
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -41,10 +47,12 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Delete", "DeleteCategory", "Categories", routeValues: null, htmlAttributes: new { id = "@item.CategoryID" })
-                    <a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a> |
+                    @Html.ActionLink("Delete", "Delete", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                    @Html.ActionLink("Edit", "Edit", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                    @Html.ActionLink("Details", "Details", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })
+                    @*<a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.TaskId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>*@
                 </td>
             </tr>
         }

@@ -5,9 +5,9 @@
 
     <h2>Categories</h2>
     <p>
-        <a asp-action="Create">Create Category</a>
+        @*<a asp-action="Create">Create Category</a>*@
         
-            @Html.ActionLink("Create", "Create", "Categories", routeValues: null, htmlAttributes: new { id = "createCategoryLink" })
+            @Html.ActionLink("Create Category", "Create", "Categories", routeValues: null, htmlAttributes: new { id = "createCategoryLink" })
         
     
     </p>
@@ -35,10 +35,10 @@
                     </td>
                     
                     <td>
-                        @Html.ActionLink("Delete", "DeleteCategory", "Categories", routeValues: null, htmlAttributes: new { id = "@item.CategoryID" })
-                        <a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> |
+                        @Html.ActionLink("Delete", "DeleteCategory", "Categories", routeValues: new { id = @item.CategoryID }, htmlAttributes: new { id = @item.CategoryID })
+                        @*<a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.CategoryID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
+                        <a asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>*@
                     </td>
                 </tr>
             }

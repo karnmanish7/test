@@ -91,7 +91,6 @@ namespace TaskRobo.Controllers
 
 
         [HttpPost]
-        //[Route("SaveCategory")]
         public ActionResult Create( Category category)
         {
 
@@ -113,8 +112,7 @@ namespace TaskRobo.Controllers
             }
             return View(category);
         }
-        [HttpDelete]
-        //[Route("DeleteCategory/{id}")]
+        [HttpGet]
         public ActionResult DeleteCategory(int? id)
         {
             int result = 0;
@@ -129,7 +127,8 @@ namespace TaskRobo.Controllers
                 {
                     return HttpNotFound();
                 }
-                return View(result);
+                //return View(result);
+                return RedirectToAction("Index");
             }
             catch (Exception)
             {

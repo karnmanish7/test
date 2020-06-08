@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using TaskRobo.Models;
 using TaskRobo.Repository;
@@ -11,7 +12,7 @@ namespace TaskRobo.Controllers
     public class TasksController : Controller
     {
         private readonly ITaskRepository _repository;
-        
+        private readonly IUserRepository _userRepository;
 
         /*
 * Implement the below mentioned methods as per mentioned requiremetns.
@@ -45,15 +46,17 @@ namespace TaskRobo.Controllers
         // DeleteConfirmed action method should handle post request. Action name should be given as Delete using attribute.
         // This method should delete task details from database based upon logged in user and id then return to index
 
-        
-        public TasksController(ITaskRepository repository)
-        {
-            _repository = repository;
-        }
-        //public TasksController()
-        //{
 
+        //public TasksController(ITaskRepository repository)
+        //{
+        //    _repository = repository;
+        //    _userRepository = userRepository;
         //}
+        public TasksController()
+        {
+            _repository = new TaskRepository();
+            _userRepository = new UserRepository();
+        }
         // GET: AllTasks
         public ActionResult Index()
         {
@@ -61,6 +64,7 @@ namespace TaskRobo.Controllers
             try
             {
                 var getAllTasks = _repository.GetAllTasks(currentUserName);
+                //ViewBag.ListItem = ObjItem;
                 return View(getAllTasks);
             }
             catch (Exception)
@@ -101,21 +105,18 @@ namespace TaskRobo.Controllers
         }
         [HttpPost]
         //[Route("SaveTask")]
-        public ActionResult SaveTask(UserTask userTask)
+        public ActionResult Create(UserTask userTask)
         {
+            var currentUserName = User.Identity.Name;
+            string UserId = this._userRepository.GetUserIdByEmail(currentUserName);
+            userTask.UserID = UserId;
             if (ModelState.IsValid)
             {
                 try
                 {
                     var postId = _repository.SaveTask(userTask);
-                    if (postId > 0)
-                    {
-                        return View(postId);
-                    }
-                    else
-                    {
-                        return HttpNotFound();
-                    }
+                    //return View(postId);
+                    return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
@@ -126,11 +127,27 @@ namespace TaskRobo.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        [HttpDelete]
-        //[Route("DeleteTask/{id}")]
-        public ActionResult DeleteTask(string emailid, int? id)
+        public ActionResult Delete(int? id)
+        {
+            var currentUserEmail = User.Identity.Name;
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var post = _repository.GetTaskById(currentUserEmail, id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string emailid, int? id)
         {
             int result = 0;
+            emailid = User.Identity.Name;
             if (id == null || id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -142,13 +159,70 @@ namespace TaskRobo.Controllers
                 {
                     return HttpNotFound();
                 }
-                return View(result);
+                //return View(result);
+                return RedirectToAction("Index");
             }
             catch (Exception)
             {
 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            var currentUserEmail = User.Identity.Name;
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var post = _repository.GetTaskById(currentUserEmail, id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+        }
+        [HttpPost]
+        public ActionResult Edit(UserTask userTask)
+        {
+            var currentUserName = User.Identity.Name;
+            string UserId = this._userRepository.GetUserIdByEmail(currentUserName);
+            userTask.UserID = UserId;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var postId = _repository.UpdateTask(userTask);
+                    
+                    //return View(postId);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+        }
+
+        public ActionResult Details(int? id)
+        {
+            var currentUserEmail = User.Identity.Name;
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var post = _repository.GetTaskById(currentUserEmail, id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
         }
     }
 }

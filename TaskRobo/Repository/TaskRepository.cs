@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Threading.Tasks;
 using TaskRobo.Models;
 
 namespace TaskRobo.Repository
@@ -20,10 +23,10 @@ namespace TaskRobo.Repository
             try
             {
 
-                var taskToDelete = context.Categories.FirstOrDefault(x => x.CategoryID == taskId);
+                var taskToDelete = context.UserTasks.FirstOrDefault(x => x.TaskId== taskId);
                 if (taskToDelete != null)
                 {
-                    context.Categories.Remove(taskToDelete);
+                    context.UserTasks.Remove(taskToDelete);
                     result = context.SaveChanges();
                     return result;
                 }
@@ -62,20 +65,31 @@ namespace TaskRobo.Repository
         }
 
         // This method should be used to save task details into database 
-        public int SaveTask(UserTask task)
+        public async Task<int> SaveTask(UserTask task)
         {
+            task.CategoryID = 2;
+            
             if (context != null)
             {
                 context.UserTasks.Add(task);
-                context.SaveChangesAsync();
+                await context.SaveChangesAsync();
                 return task.TaskId;
             }
             return 0;
         }
 
         // This method should be used to update task details into database
-        public int UpdateTask(UserTask task)
+        public async Task<int> UpdateTask(UserTask task)
         {
+            task.CategoryID = 2;
+
+            if (context != null)
+            {
+                context.Entry(task).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+               
+                return task.TaskId;
+            }
             return 0;
         }
     }
