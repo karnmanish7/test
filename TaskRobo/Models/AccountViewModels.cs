@@ -19,6 +19,9 @@ namespace TaskRobo.Models
     // ConfirmPassword - string (required), should display password characters instead of normal text in the field. Minimum length of the password should be 6 and maximum 100. Should match with password field
     public class RegisterViewModel
     {
-        
+        public string UserID { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+
     }
 }
