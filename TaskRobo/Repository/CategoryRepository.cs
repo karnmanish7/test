@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
 using TaskRobo.Models;
@@ -12,28 +13,64 @@ namespace TaskRobo.Repository
         {
             context = new TaskDbContext();
         }
-
+      
         // This method should be used to delete category details from database based upon category id
-        public int DeleteCategory(int categoryId)
+        public int DeleteCategory(int? categoryId)
         {
-            return 0;
+            int result = 0;
+            try
+            {
+
+                var categoryToDelete = context.Categories.FirstOrDefault(x => x.CategoryID == categoryId);
+                if (categoryToDelete != null)
+                {
+                    context.Categories.Remove(categoryToDelete);
+                    result = context.SaveChanges();
+                    return result;
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // This method should be used to get all categories from database based upon user's email
         public IReadOnlyList<Category> GetAllCategories(string email)
         {
+            if (context != null)
+            {
+                var getAllCategories = context.Categories.ToList();
+
+                return getAllCategories;
+            }
             return null;
+           
         }
 
         // This method should be used to get category details based upon category id
-        public Category GetCategoryById(int categoryId)
+        public Category GetCategoryById(int? categoryId)
         {
+            if (context != null)
+            {
+                var result = context.Categories.Find(categoryId);
+
+                return result;
+            }
             return null;
         }
 
         // This method should be used to save category details into database
         public int SaveCategory(Category category)
         {
+            if (context != null)
+            {
+                context.Categories.Add(category);
+                context.SaveChangesAsync();
+                return category.CategoryID;
+            }
             return 0;
         }
     }
