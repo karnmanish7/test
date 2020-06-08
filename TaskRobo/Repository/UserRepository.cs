@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TaskRobo.Models;
 
 namespace TaskRobo.Repository
@@ -14,13 +15,16 @@ namespace TaskRobo.Repository
         // This method should be used to save user details into database
         public int CreateUser(AppUser user)
         {
-            return 0;
+            user.UserID = Guid.NewGuid().ToString();
+            context.AppUsers.Add(user);
+            context.SaveChanges();
+            return 1;
         }
 
         // This method should be used to return boolean value. If user is authenticated successfully it should return true else return false
         public bool IsAuthenticated(AppUser user)
         {
-            return false;
+            return context.AppUsers.Where(c => c.Email == user.Email && c.Password == user.Password).Count() == 1;
         }
     }
 }

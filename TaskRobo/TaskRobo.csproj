@@ -110,6 +110,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -134,13 +137,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006071641257_initialcreate.cs" />
-    <Compile Include="Migrations\202006071641257_initialcreate.designer.cs">
-      <DependentUpon>202006071641257_initialcreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202006071649108_usertask added.cs" />
-    <Compile Include="Migrations\202006071649108_usertask added.designer.cs">
-      <DependentUpon>202006071649108_usertask added.cs</DependentUpon>
+    <Compile Include="Migrations\202006080604188_initial.cs" />
+    <Compile Include="Migrations\202006080604188_initial.designer.cs">
+      <DependentUpon>202006080604188_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -223,11 +222,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006071641257_initialcreate.resx">
-      <DependentUpon>202006071641257_initialcreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202006071649108_usertask added.resx">
-      <DependentUpon>202006071649108_usertask added.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006080604188_initial.resx">
+      <DependentUpon>202006080604188_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
