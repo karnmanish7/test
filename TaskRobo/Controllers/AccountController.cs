@@ -10,16 +10,18 @@ namespace TaskRobo.Controllers
         private readonly TaskDbContext _context;
         private readonly IUserRepository _useRrepository;
 
-        public AccountController(TaskDbContext context, IUserRepository useRrepository)
+        public AccountController(IUserRepository useRrepository)
         {
-            _context = context;
+            _context = new TaskDbContext();
             _useRrepository = useRrepository;
         }
 
-        public AccountController()
-        {
+        //public AccountController()
+        //{
+        //    _context = new TaskDbContext();
+        //    _useRrepository = new UserRepository() ;
 
-        }
+        //}
         // Register action method should return view
         [HttpGet]
         public ActionResult Register()
@@ -37,21 +39,21 @@ namespace TaskRobo.Controllers
             appUser.Email = model.Email;
             appUser.Password = model.Password;
 
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(appUser);
-            //     _useRrepository.CreateUser<AppUser>(appUser);
-            //    return RedirectToAction(nameof(Index));
-            //}
-            return View(appUser);
+            if (ModelState.IsValid)
+            {
+               // _context.Add(appUser);
+                _useRrepository.CreateUser(appUser);
+                return RedirectToAction("Index", "Tasks");
+            }
+            return View(model);
 
         }
 
         [HttpGet]
         // Login action method should return view to login
         public ActionResult Login(string returnUrl)
-        {
-           
+        {  
+
             return View();
         }
 
@@ -59,16 +61,33 @@ namespace TaskRobo.Controllers
         // user should be redirected to Tasks list view after successfull registration
         // It should display and error message, if user is not authenticated
         
-        public ActionResult Login(LoginViewModel model, string returnUrl)
-        {
-            return View();
+        public ActionResult Login(LoginViewModel model, string returnUrl){
+
+            AppUser appUser = new AppUser();
+            appUser.Email = model.Email;
+            appUser.Password = model.Password;
+
+            if (ModelState.IsValid)
+            {
+                bool IsValidUser = _useRrepository.IsAuthenticated(appUser);
+
+                if (IsValidUser)
+                {
+                    FormsAuthentication.SetAuthCookie(appUser.Email, false);
+                    return RedirectToAction("Index", "Tasks");
+                }
+            }
+            ModelState.AddModelError("", "invalid Username or Password");
+           
+            return View(model);
         }
 
         // LogOff action method should handle post request, sign out the user and redirect to login action method
         
         public ActionResult LogOff()
         {
-            return View();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
         }
 
     }
