@@ -47,10 +47,10 @@ namespace TaskRobo.Controllers
             try
             {
                 var getAllCategories = _repository.GetAllCategories(currentUserName);
-                if (getAllCategories.Count == 0)
-                {
-                    return HttpNotFound();
-                }
+                //if (getAllCategories.Count == 0)
+                //{
+                //    return HttpNotFound();
+                //}
                 return View(getAllCategories);
             }
             catch (Exception)
