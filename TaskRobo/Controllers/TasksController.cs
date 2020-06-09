@@ -99,35 +99,19 @@ namespace TaskRobo.Controllers
             }
         }
 
-        // GET: Tasks/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
-           
-            //TaskDbContext dbContext = new TaskDbContext();
-            //IEnumerable<SelectListItem> items = dbContext.Categories.Select(c => new SelectListItem
-            //{
-            //    Value = c.CategoryID.ToString(),
-            //    Text = c.CategoryTitle
-
-            //});
-
-            //ViewBag.JobTitle = items;
-
-            //var vm = new UserTask();
-            //vm.cate = dbContext.Categories.Select(x => new SelectListItem
-            //{
-            //    Value = x.CategoryID.ToString(),
-            //    Text = x.CategoryTitle
-            //}).ToList();
-            //var p = new UserTask();
-            //p.catogories = dbContext.Categories.ToList();
-
-            return View();
+            var currentUserName = User.Identity.Name;
+            List<Category> categories = this._userRepository.GetCategoriesForUser(currentUserName);
+            var model = new TaskViewModel();
+            model.Catogories = categories;
+            return View(model);
         }
         [HttpPost]
+        //[Route("SaveTask")]
         public ActionResult Create(UserTask userTask)
         {
-            userTask.catogories = ViewBag.JobTitle;
             var currentUserName = User.Identity.Name;
             string UserId = this._userRepository.GetUserIdByEmail(currentUserName);
             userTask.UserID = UserId;

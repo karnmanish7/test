@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TaskRobo.Models;
 
@@ -30,6 +31,11 @@ namespace TaskRobo.Repository
         public string GetUserIdByEmail(string Email)
         {
             return context.AppUsers.Where(c => c.Email == Email).Select(c => c.UserID).FirstOrDefault();
+        }
+
+        public List<Category> GetCategoriesForUser(string Email)
+        {
+            return context.Categories.Where(c => c.AppUsers.Email == Email).ToList();
         }
     }
 }
