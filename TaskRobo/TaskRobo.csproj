@@ -226,14 +226,14 @@
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Tasks\Create.cshtml" />
-    <Content Include="Views\Tasks\Delete.cshtml" />
-    <Content Include="Views\Tasks\Details.cshtml" />
-    <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\Delete.cshtml" />
+    <Content Include="Views\Tasks\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
