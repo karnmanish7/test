@@ -6,7 +6,7 @@ using TaskRobo.Repository;
 
 namespace TaskRobo.Controllers
 {
-    
+
     public class CategoriesController : Controller
     {
         private readonly ICategoryRepository _repository;
@@ -30,22 +30,23 @@ namespace TaskRobo.Controllers
         // Delete action method should handle post request and delete category from database based upon category id and redirect to index
 
 
-        public CategoriesController(ICategoryRepository repository, IUserRepository userRepository)
-        {
-            _repository = repository;
-            _userRepository = userRepository;
-        }
-        //public CategoriesController()
+        //public CategoriesController(ICategoryRepository repository, IUserRepository userRepository)
         //{
-        //    _repository = new CategoryRepository();
+        //    _repository = repository;
+        //    _userRepository = userRepository;
         //}
+        public CategoriesController()
+        {
+            _repository = new CategoryRepository();
+            _userRepository = new UserRepository();
+        }
         // GET: AllCategories
         public ActionResult Index()
         {
             var currentUserName = User.Identity.Name;
             try
             {
-                var getAllCategories =  _repository.GetAllCategories(currentUserName);
+                var getAllCategories = _repository.GetAllCategories(currentUserName);
                 if (getAllCategories.Count == 0)
                 {
                     return HttpNotFound();
@@ -63,7 +64,7 @@ namespace TaskRobo.Controllers
         public ActionResult GetCategoryById(int? id)
         {
 
-            if (id==null || id == 0)
+            if (id == null || id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -91,7 +92,7 @@ namespace TaskRobo.Controllers
 
 
         [HttpPost]
-        public ActionResult Create( Category category)
+        public ActionResult Create(Category category)
         {
 
             var currentUserName = User.Identity.Name;
@@ -122,7 +123,7 @@ namespace TaskRobo.Controllers
             }
             try
             {
-                result =  _repository.DeleteCategory(id);
+                result = _repository.DeleteCategory(id);
                 if (result == 0)
                 {
                     return HttpNotFound();

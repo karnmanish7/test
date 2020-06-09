@@ -3,14 +3,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Task</h2>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "create Failed, fields.");
     <div>
         <fieldset>
-            <legend>Category Form</legend>
+            
             <div class="editor-label">@Html.LabelFor(u => u.TaskTitle)</div>
             <div class="editor-field">
                 @Html.TextBoxFor(u => u.TaskTitle)
@@ -29,11 +29,11 @@
                 @Html.ValidationMessageFor(u => u.TaskStatus)
             </div>
 
-            <div>
+            @*<div>
                 @Html.DropDownList("JobTitle", "Select a Value")
                 @Html.DropDownListFor(m => m.catogories, new SelectList(ViewBag.JobTitle),"Select Gender")
                
-            </div>
+            </div>*@
             @*<div class="editor-label">@Html.LabelFor(u => u.TaskStatus)</div>
             <div class="editor-field">
                 @Html.DropDownListFor(u => u.CategoryID, "1")

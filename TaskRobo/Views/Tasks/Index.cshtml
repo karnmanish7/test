@@ -58,24 +58,30 @@
         }
     </tbody>
 </table>
-@foreach (var item in Model)
-{
+@*@foreach (var item in Model)
+{*@
     <div class="container">
         <div class="row">
-            <div class="col col-md-6">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.TaskTitle)</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.TaskContent)</h6>
-                        <p class="card-text"> @Html.DisplayFor(modelItem => item.TaskStatus)</p>
-                        <a href="#" class="card-link">Edit</a>
-                        <a href="#" class="card-link">Delete</a>
+            @foreach (var item in Model)
+            {
+                <div class="col col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                           Task Title: <h5 class="card-title"> @Html.DisplayFor(modelItem => item.TaskTitle)</h5>
+                           Task Content: <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.TaskContent)</h6>
+                           Task Status: <p class="card-text"> @Html.DisplayFor(modelItem => item.TaskStatus)</p>
+                            @Html.ActionLink("Delete", "Delete", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                            @Html.ActionLink("Edit", "Edit", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                            @Html.ActionLink("Details", "Details", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })
+                            @*<a href="#" class="card-link">Edit</a>
+                            <a href="#" class="card-link">Delete</a>*@
+                        </div>
                     </div>
                 </div>
+            }
             </div>
-        </div>
     </div>
-}
+@* } *@
 
 @*<div class="container">
         <div class="row">
