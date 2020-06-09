@@ -7,7 +7,7 @@
 
 <h2>Create Task</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Tasks", FormMethod.Post, new { @class = "task", @name = "task" }))
 {
     @Html.ValidationSummary(true, "create Failed, fields.");
     <div>
