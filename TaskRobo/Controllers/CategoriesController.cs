@@ -113,8 +113,24 @@ namespace TaskRobo.Controllers
             }
             return View(category);
         }
-        [HttpGet]
-        public ActionResult DeleteCategory(int? id)
+
+        public ActionResult Delete(int? id)
+        {
+            var currentUserEmail = User.Identity.Name;
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var post = _repository.GetCategoryById(id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+        }
+        [HttpPost]
+        public ActionResult Delete(string emailid, int? id)
         {
             int result = 0;
             if (id == null || id == 0)
