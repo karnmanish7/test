@@ -1,6 +1,10 @@
-﻿@model TaskRobo.Models.UserTask
+﻿@model TaskRobo.Models.TaskViewModel
 @{
     ViewBag.Title = "Create";
+
+    List<SelectListItem> categorySelectItem = Model.Catogories.Select(c => new SelectListItem() { Text = c.CategoryTitle, Value = c.CategoryID.ToString() }).ToList(); ;
+
+
 }
 
 <h2>Create</h2>
@@ -34,11 +38,11 @@
                 @Html.ValidationMessageFor(u => u.TaskStatus)
             </div>*@
 
-            @*@Html.LabelFor(model => model.CategoryID, "Category", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CategoryID, "Category", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CategoryID, new SelectList(Model.catogories, "CategoryId", "CategoryTitle"), "- Please Select -")
+                @Html.DropDownListFor(model => model.CategoryID, new SelectList(categorySelectItem, "Value", "Text"), "- Please Select -")
                 @Html.ValidationMessageFor(model => model.CategoryID)
-            </div>*@
+            </div>
 
             <input type="submit" value="Create" />
         </fieldset>

@@ -20,5 +20,6 @@ namespace TaskRobo.Models
         [ForeignKey("CategoryID")]
         public Category catogories { get; set; }
         public int CategoryID { get; set; }
+
     }
 }

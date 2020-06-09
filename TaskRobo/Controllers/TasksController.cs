@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -101,7 +102,11 @@ namespace TaskRobo.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            return View();
+            var currentUserName = User.Identity.Name;
+            List<Category> categories = this._userRepository.GetCategoriesForUser(currentUserName);
+            var model = new TaskViewModel();
+            model.Catogories = categories;
+            return View(model);
         }
         [HttpPost]
         //[Route("SaveTask")]

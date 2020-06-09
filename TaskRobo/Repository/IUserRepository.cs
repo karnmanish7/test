@@ -1,4 +1,5 @@
-﻿using TaskRobo.Models;
+﻿using System.Collections.Generic;
+using TaskRobo.Models;
 
 namespace TaskRobo.Repository
 {
@@ -8,5 +9,7 @@ namespace TaskRobo.Repository
         bool IsAuthenticated(AppUser user);
 
         string GetUserIdByEmail(string Email);
+
+        List<Category> GetCategoriesForUser(string Email);
     }
 }
