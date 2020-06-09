@@ -67,6 +67,8 @@ namespace TaskRobo.Repository
         // This method should be used to save task details into database 
         public async Task<int> SaveTask(UserTask task)
         {
+          
+            
             if (context != null)
             {
                 context.UserTasks.Add(task);
@@ -79,7 +81,7 @@ namespace TaskRobo.Repository
         // This method should be used to update task details into database
         public async Task<int> UpdateTask(UserTask task)
         {
-            task.CategoryID = 2;
+         
 
             if (context != null)
             {

@@ -176,6 +176,11 @@ namespace TaskRobo.Controllers
 
         public ActionResult Edit(int? id)
         {
+            var currentUserName = User.Identity.Name;
+            List<Category> categories = this._userRepository.GetCategoriesForUser(currentUserName);
+            var model = new TaskViewModel();
+            model.Catogories = categories;
+
             var currentUserEmail = User.Identity.Name;
             if (id == null)
             {
@@ -187,7 +192,15 @@ namespace TaskRobo.Controllers
             {
                 return HttpNotFound();
             }
-            return View(post);
+
+            model.TaskId = post.TaskId;
+            model.TaskContent = post.TaskContent;
+            model.TaskStatus = post.TaskStatus;
+            model.TaskTitle = post.TaskTitle;
+            model.CategoryID = post.CategoryID;
+
+
+            return View(model);
         }
         [HttpPost]
         public ActionResult Edit(UserTask userTask)
