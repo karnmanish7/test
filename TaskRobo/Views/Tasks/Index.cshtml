@@ -5,96 +5,73 @@
 
 <h2>Tasks</h2>
 <p>
-    
-
     @Html.ActionLink("Create Task", "Create", "Tasks", routeValues: null, htmlAttributes: new { id = "createTaskLink" })
-
-
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskContent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskStatus)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+
+<div class="container">
+    <div class="row">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaskId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaskTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaskContent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaskStatus)
-                </td>
+            <div class="col col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        Task Title: <h5 class="card-title"> @Html.DisplayFor(modelItem => item.TaskTitle)</h5>
+                        Task Content: <h5 class="card-title">@Html.DisplayFor(modelItem => item.TaskContent)</h5>
+                        Task Status: <h5 class="card-title"> @Html.DisplayFor(modelItem => item.TaskStatus)</h5>
+                        @Html.ActionLink("Delete", "Delete", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                        @Html.ActionLink("Edit", "Edit", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                        @Html.ActionLink("Details", "Details", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })
 
-                <td>
-                    @Html.ActionLink("Delete", "Delete", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
-                    @Html.ActionLink("Edit", "Edit", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
-                    @Html.ActionLink("Details", "Details", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })
-                    @*<a asp-action="Edit" asp-route-id="@item.TaskId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TaskId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TaskId">Delete</a>*@
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-@*@foreach (var item in Model)
-{*@
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                           Task Title: <h5 class="card-title"> @Html.DisplayFor(modelItem => item.TaskTitle)</h5>
-                           Task Content: <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.TaskContent)</h6>
-                           Task Status: <p class="card-text"> @Html.DisplayFor(modelItem => item.TaskStatus)</p>
-                            @Html.ActionLink("Delete", "Delete", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
-                            @Html.ActionLink("Edit", "Edit", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
-                            @Html.ActionLink("Details", "Details", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })
-                            @*<a href="#" class="card-link">Edit</a>
-                            <a href="#" class="card-link">Delete</a>*@
-                        </div>
                     </div>
                 </div>
-            }
             </div>
+        }
     </div>
-@* } *@
+</div>
 
-@*<div class="container">
-        <div class="row">
-            <div class="col col-md-6">
-                <div class="card h-100">
-                    <p class="card-body">This card on the left of the other two cards, with a fixed height and scrolling.</p>
-                </div>
-            </div>
-            <div class="col col-md-6">
-                <div class="card">
-                    <p class="card-body">How do you want to ask the question?<p>
-                </div>
 
-            </div>
-        </div>
-    </div>*@
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskContent)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskStatus)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskContent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskStatus)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                        @Html.ActionLink("Edit", "Edit", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
+                        @Html.ActionLink("Details", "Details", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@

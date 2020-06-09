@@ -1,10 +1,10 @@
 ﻿@model TaskRobo.Models.TaskViewModel
 @{
     ViewBag.Title = "Edit";
-    List<SelectListItem> categorySelectItem = Model.Catogories.Select(c => new SelectListItem() { Text = c.CategoryTitle, Value = c.CategoryID.ToString() }).ToList(); 
+    List<SelectListItem> categorySelectItem = Model.Catogories.Select(c => new SelectListItem() { Text = c.CategoryTitle, Value = c.CategoryID.ToString() }).ToList();
 }
 
-    <h2>Edit Task</h2>
+<h2>Edit Task</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.ValidationSummary(true, "create Failed, fields.");
     <div>
         <fieldset>
-            @*<legend>Edit Task</legend>*@
             @Html.HiddenFor(c => c.TaskId)
             <div class="editor-label">@Html.LabelFor(u => u.TaskTitle)</div>
             <div class="editor-field">
@@ -32,12 +31,12 @@
                 @Html.ValidationMessageFor(u => u.TaskStatus)
             </div>
             @Html.LabelFor(model => model.CategoryID, "Category", new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(
-            x => x.CategoryID,
-            new SelectList(categorySelectItem, "Value", "Text"), new { Value = Model.CategoryID })
-            @Html.ValidationMessageFor(model => model.CategoryID)
-        </div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                x => x.CategoryID,
+                new SelectList(categorySelectItem, "Value", "Text"), new { Value = Model.CategoryID })
+                @Html.ValidationMessageFor(model => model.CategoryID)
+            </div>
 
             <input type="submit" value="Update" />
         </fieldset>

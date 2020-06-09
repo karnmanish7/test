@@ -10,7 +10,6 @@
     @Html.ValidationSummary(true, "create Failed, fields.");
     <div>
         <fieldset>
-            @*<legend>Delete Task</legend>*@
             <div class="editor-label">@Html.LabelFor(u => u.TaskTitle)</div>
             <div class="editor-field">
                 @Html.TextBoxFor(u => u.TaskTitle)
@@ -28,7 +27,7 @@
                 @Html.TextBoxFor(u => u.TaskStatus)
                 @Html.ValidationMessageFor(u => u.TaskStatus)
             </div>
-                <input type="submit" value="Delete" />
+            <input type="submit" value="Delete" />
         </fieldset>
     </div>
 }

@@ -99,7 +99,7 @@ namespace TaskRobo.Controllers
             }
         }
 
-        // GET: Categories/Create
+        // GET: Tasks/Create
         public ActionResult Create()
         {
             var currentUserName = User.Identity.Name;
@@ -109,7 +109,6 @@ namespace TaskRobo.Controllers
             return View(model);
         }
         [HttpPost]
-        //[Route("SaveTask")]
         public ActionResult Create(UserTask userTask)
         {
             var currentUserName = User.Identity.Name;

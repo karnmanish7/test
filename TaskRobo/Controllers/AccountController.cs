@@ -7,16 +7,20 @@ namespace TaskRobo.Controllers
 {
     public class AccountController : Controller
     {
-        //private readonly TaskDbContext _context;
+       
         private readonly IUserRepository _useRrepository;
 
-        public AccountController(IUserRepository useRrepository)
+        //public AccountController(IUserRepository useRrepository)
+        //{
+        //    _useRrepository = useRrepository;
+        //}
+
+        public AccountController()
         {
-            //_context = new TaskDbContext();
-            _useRrepository = useRrepository;
+            _useRrepository = new UserRepository();
         }
 
-   
+
         // Register action method should return view
         [HttpGet]
         public ActionResult Register()

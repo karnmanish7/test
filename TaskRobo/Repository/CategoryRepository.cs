@@ -21,7 +21,6 @@ namespace TaskRobo.Repository
             int result = 0;
             try
             {
-
                 var categoryToDelete = context.Categories.FirstOrDefault(x => x.CategoryID == categoryId);
                 if (categoryToDelete != null)
                 {
