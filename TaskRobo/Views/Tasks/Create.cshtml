@@ -28,6 +28,12 @@
                 @Html.TextBoxFor(u => u.TaskStatus)
                 @Html.ValidationMessageFor(u => u.TaskStatus)
             </div>
+
+            <div>
+                @Html.DropDownList("JobTitle", "Select a Value")
+                @Html.DropDownListFor(m => m.catogories, new SelectList(ViewBag.JobTitle),"Select Gender")
+               
+            </div>
             @*<div class="editor-label">@Html.LabelFor(u => u.TaskStatus)</div>
             <div class="editor-field">
                 @Html.DropDownListFor(u => u.CategoryID, "1")
