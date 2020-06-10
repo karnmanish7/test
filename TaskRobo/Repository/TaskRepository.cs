@@ -44,7 +44,7 @@ namespace TaskRobo.Repository
             var result = context.AppUsers.FirstOrDefault(x => x.Email == email);
             if (context != null)
             {
-                var getAllTasks = context.UserTasks.Where(x => x.UserID == result.UserID).ToList();
+                var getAllTasks = context.UserTasks.Include(c=>c.catogories).Where(x => x.UserID == result.UserID).ToList();
 
                 return getAllTasks;
             }

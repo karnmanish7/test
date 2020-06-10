@@ -18,6 +18,7 @@
                         Task Title: <h5 class="card-title"> @Html.DisplayFor(modelItem => item.TaskTitle)</h5>
                         Task Content: <h5 class="card-title">@Html.DisplayFor(modelItem => item.TaskContent)</h5>
                         Task Status: <h5 class="card-title"> @Html.DisplayFor(modelItem => item.TaskStatus)</h5>
+                        Task Category: <h5 class="card-title"> @Html.DisplayFor(modelItem => item.catogories.CategoryTitle) </h5>
                         @Html.ActionLink("Delete", "Delete", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
                         @Html.ActionLink("Edit", "Edit", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })|
                         @Html.ActionLink("Details", "Details", "Tasks", routeValues: new { id = @item.TaskId }, htmlAttributes: new { id = "@item.CategoryID" })
