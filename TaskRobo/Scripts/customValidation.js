@@ -35,7 +35,7 @@ function validateStatus() {
         return;
     }
     if (taskStatus.length > 10) {
-        $('#statusMsg').html('Task Status can not be more than 50')
+        $('#statusMsg').html('Task Status can not be more than 10')
         return;
     }   
 }
@@ -47,7 +47,7 @@ function validateForm(event) {
     var taskCategory = $('#CategoryID').val()
     if (taskCategory === '') {
         event.preventDefault()
-        $('#categoryMsg').html('Task Content Can not be empty');
+        $('#categoryMsg').html('Task Category Can not be empty');
         return;
     }
 }
