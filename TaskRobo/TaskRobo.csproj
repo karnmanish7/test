@@ -165,9 +165,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202006080604188_initial.cs" />
-    <Compile Include="Migrations\202006080604188_initial.designer.cs">
-      <DependentUpon>202006080604188_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202006090617404_initial.cs" />
+    <Compile Include="Migrations\202006090617404_initial.designer.cs">
+      <DependentUpon>202006090617404_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006090621290_requiredRemoved.cs" />
+    <Compile Include="Migrations\202006090621290_requiredRemoved.designer.cs">
+      <DependentUpon>202006090621290_requiredRemoved.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -213,7 +217,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -251,8 +257,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202006080604188_initial.resx">
-      <DependentUpon>202006080604188_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202006090617404_initial.resx">
+      <DependentUpon>202006090617404_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006090621290_requiredRemoved.resx">
+      <DependentUpon>202006090621290_requiredRemoved.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
