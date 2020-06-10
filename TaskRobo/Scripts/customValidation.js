@@ -1,6 +1,9 @@
 //This function should validate Task Titlte which should allow only alpha numerals
 //and should also display error message in a <p> element with id as 'titleMsg'
+
+var isValidated = false;
 function validateTitle() {
+    isValidated = false;
     var contentValue = $('#TaskTitle').val().trim();
     if (contentValue === '') {
         $('#titleMsg').html('Task Title Can not be empty')
@@ -10,11 +13,14 @@ function validateTitle() {
         $('#titleMsg').html('Task Title can not be more than 50')
         return;
     }   
+
+    isValidated = true;
 }
 
 //This function checks if taskContent is not empty and length is not more 50 characters
 //and also displays error message in a <p> element with id as 'contentMsg'
 function validateContent() {
+    isValidated = false;
     var contentValue = $('#TaskContent').val().trim();
     if (contentValue === '') {
         $('#contentMsg').html('Task Content Can not be empty')
@@ -24,12 +30,16 @@ function validateContent() {
         $('#contentMsg').html('Task Content can not be more than 50')
         return;
     }   
+    isValidated = true;
 }
 
 //This function checks if taskStatus is not empty and length is not more 10 characters
 //and also displays error message in a <p> element with id as 'statusMsg'
 function validateStatus() {
+
+    isValidated = false;
     var taskStatus = $('#TaskStatus').val().trim();
+    
     if (taskStatus === '') {
         $('#statusMsg').html('Task Status Can not be empty')
         return;
@@ -38,13 +48,21 @@ function validateStatus() {
         $('#statusMsg').html('Task Status can not be more than 10')
         return;
     }   
+    isValidated = true;
 }
 
 //This function checks if Category is selected or not. Category is mandatory
 //and also displays error message in a <p> element with id as 'categoryMsg'
 // It should also prevents the form to submit, if category is not selected.
 function validateForm(event) {
+    validateTitle();
+    validateContent();
+    validateStatus()
     var taskCategory = $('#CategoryID').val()
+
+    if (isValidated==false) {
+        event.preventDefault()
+    }
     if (taskCategory === '') {
         event.preventDefault()
         $('#categoryMsg').html('Task Category Can not be empty');
